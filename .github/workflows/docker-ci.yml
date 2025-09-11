@@ -9,6 +9,7 @@ on:
 env:
   IMAGE_NAME: ${{ vars.IMAGE_NAME }}
   PLATFORMS: ${{ vars.PLATFORMS }}
+  TEST_PLATFORM: ${{ vars.TEST_PLATFORM }}
 
 jobs:
   build-test-push:
@@ -62,12 +63,13 @@ jobs:
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
 
-      - name: Build ${{ matrix.variant }} image
+      # Build only one architecture image for testing to being able to --load it
+      - name: Build ${{ matrix.variant }} image for test
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{ matrix.dockerfile }}
-          platforms: ${{ env.PLATFORMS }}
+          platforms: ${{ env.TEST_PLATFORM }}
           push: false
           load: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -87,7 +89,8 @@ jobs:
           curl -sSf http://localhost:6080 > /dev/null
           echo "Test passed for ${{ matrix.tag }}"
 
-      - name: Push image
+      # Build and push multi-arch images
+      - name: Push multi-arch ${{ matrix.variant }} image
         uses: docker/build-push-action@v6
         with:
           context: .
