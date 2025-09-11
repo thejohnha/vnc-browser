@@ -3,8 +3,10 @@ A Lightweight, Ready-to-Use Web Browsing Environment in Docker with VNC Access
 
 **Leave a star ⭐ if you like this project 🙂 thank you.**
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/mrcolorrain/vnc-browser.svg)](https://hub.docker.com/repository/docker/mrcolorrain/vnc-browser)
-[![Docker Stars](https://img.shields.io/docker/stars/mrcolorrain/vnc-browser?style=flat-square)](https://hub.docker.com/r/mrcolorrain/vnc-browser)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mrcolorrain/vnc-browser?style=flat-square&link=https://hub.docker.com/r/mrcolorrain/vnc-browser)](https://hub.docker.com/r/mrcolorrain/vnc-browser)
+[![Docker Stars](https://img.shields.io/docker/stars/mrcolorrain/vnc-browser?style=flat-square&link=https://hub.docker.com/r/mrcolorrain/vnc-browser)](https://hub.docker.com/r/mrcolorrain/vnc-browser)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MRColorR/vnc-browser/docker-ci.yml?style=flat&link=https%3A%2F%2Fgithub.com%2FMRColorR%2Fvnc-browser%2Factions)](https://github.com/MRColorR/vnc-browser/actions)
+
 
 ## Info :information_source:
 VNC-Browser is a minimal, customizable, Linux-based Docker image designed to provide a lightweight environment for browsing the web via VNC.
