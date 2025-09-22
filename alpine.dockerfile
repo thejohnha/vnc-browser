@@ -68,6 +68,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     fluxbox \
     xterm \
     nano \
+    font-freefont \
     firefox && \
     ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html 
 
