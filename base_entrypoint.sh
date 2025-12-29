@@ -25,6 +25,7 @@ echo "LC All: ${LC_ALL}"
 echo "Customize active: ${CUSTOMIZE}"
 echo "Custom entrypoints dir: ${CUSTOM_ENTRYPOINTS_DIR}"
 echo "Autostart browser: ${AUTO_START_BROWSER}"
+
 # Handle Dark Mode logic
 if [ "${DARK_MODE}" = "true" ]; then
     export GTK_THEME=Adwaita:dark
@@ -38,12 +39,12 @@ if [ "${DARK_MODE}" = "true" ]; then
         STYLE_SOURCE="/usr/share/fluxbox/styles/BlueNight"
     fi
 
-    # Create CustomDark style based on selected source
+    # Create CustomDark style
     if [ -e "$STYLE_SOURCE" ]; then
         cp "$STYLE_SOURCE" /root/.fluxbox/styles/CustomDark
         # Remove existing rootCommand from the style to prevent overrides
         sed -i '/rootCommand/d' /root/.fluxbox/styles/CustomDark
-        # Force charcoal background in the style itself
+        # Set charcoal background
         echo "rootCommand: fbsetroot -solid '#333333'" >> /root/.fluxbox/styles/CustomDark
         echo "session.styleFile: /root/.fluxbox/styles/CustomDark" >> /root/.fluxbox/init
     else
