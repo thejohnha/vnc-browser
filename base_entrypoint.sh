@@ -25,6 +25,15 @@ echo "LC All: ${LC_ALL}"
 echo "Customize active: ${CUSTOMIZE}"
 echo "Custom entrypoints dir: ${CUSTOM_ENTRYPOINTS_DIR}"
 echo "Autostart browser: ${AUTO_START_BROWSER}"
+# Handle Dark Mode logic
+if [ "${DARK_MODE}" = "true" ]; then
+    export GTK_THEME=Adwaita:dark
+    BROWSER_OPTIONS="${BROWSER_OPTIONS} --force-dark-mode"
+    export XTERM_OPTIONS="${XTERM_OPTIONS} -bg black -fg white"
+    mkdir -p /root/.fluxbox
+    echo "session.styleFile: /usr/share/fluxbox/styles/debian-dark" >> /root/.fluxbox/init
+fi
+
 echo "Homepage website URL: ${STARTING_WEBSITE_URL}"
 echo "Autostart xterm: ${AUTO_START_XTERM}"
 echo "-----------------"

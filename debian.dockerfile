@@ -70,7 +70,8 @@ RUN set -e; \
     fluxbox \
     xterm \
     nano \
-    chromium && \
+    chromium \
+    gnome-themes-extra && \
     apt autoremove --purge -y && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
