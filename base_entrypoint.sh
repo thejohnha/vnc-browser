@@ -30,8 +30,26 @@ if [ "${DARK_MODE}" = "true" ]; then
     export GTK_THEME=Adwaita:dark
     BROWSER_OPTIONS="${BROWSER_OPTIONS} --force-dark-mode"
     export XTERM_OPTIONS="${XTERM_OPTIONS} -bg black -fg white"
-    mkdir -p /root/.fluxbox
-    echo "session.styleFile: /usr/share/fluxbox/styles/debian-dark" >> /root/.fluxbox/init
+    mkdir -p /root/.fluxbox/styles
+    
+    # Select base style (Debian or Alpine fallback)
+    STYLE_SOURCE="/usr/share/fluxbox/styles/debian-dark"
+    if [ ! -e "$STYLE_SOURCE" ]; then
+        STYLE_SOURCE="/usr/share/fluxbox/styles/BlueNight"
+    fi
+
+    # Create CustomDark style based on selected source
+    if [ -e "$STYLE_SOURCE" ]; then
+        cp "$STYLE_SOURCE" /root/.fluxbox/styles/CustomDark
+        # Remove existing rootCommand from the style to prevent overrides
+        sed -i '/rootCommand/d' /root/.fluxbox/styles/CustomDark
+        # Force charcoal background in the style itself
+        echo "rootCommand: fbsetroot -solid '#333333'" >> /root/.fluxbox/styles/CustomDark
+        echo "session.styleFile: /root/.fluxbox/styles/CustomDark" >> /root/.fluxbox/init
+    else
+         # Fallback if no known style exists
+        echo "session.screen0.rootCommand: fbsetroot -solid '#333333'" >> /root/.fluxbox/init
+    fi
 fi
 
 echo "Homepage website URL: ${STARTING_WEBSITE_URL}"

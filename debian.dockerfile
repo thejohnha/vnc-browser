@@ -72,6 +72,7 @@ RUN set -e; \
     nano \
     chromium \
     gnome-themes-extra && \
+    ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && \
     apt autoremove --purge -y && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
