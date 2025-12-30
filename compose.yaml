@@ -1,0 +1,28 @@
+services:
+  vnc-debian:
+    build:
+      context: .
+      dockerfile: debian.dockerfile
+    image: vnc-browser:debian
+    container_name: vnc-browser-debian
+    ports:
+      - "5900:5900"
+      - "6080:6080"
+    environment:
+      - DARK_MODE=true
+      - VNC_PASSWORD=money4band
+    restart: unless-stopped
+
+  vnc-alpine:
+    build:
+      context: .
+      dockerfile: alpine.dockerfile
+    image: vnc-browser:alpine
+    container_name: vnc-browser-alpine
+    ports:
+      - "5902:5900"
+      - "6082:6080"
+    environment:
+      - DARK_MODE=true
+      - VNC_PASSWORD=money4band
+    restart: unless-stopped
