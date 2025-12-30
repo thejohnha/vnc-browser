@@ -44,8 +44,18 @@ if [ "${DARK_MODE}" = "true" ]; then
         cp "$STYLE_SOURCE" /root/.fluxbox/styles/CustomDark
         # Remove existing rootCommand from the style to prevent overrides
         sed -i '/rootCommand/d' /root/.fluxbox/styles/CustomDark
-        # Set charcoal background
-        echo "rootCommand: fbsetroot -solid '#333333'" >> /root/.fluxbox/styles/CustomDark
+        
+        # Force charcoal background by modifying the style properties directly
+        # This overrides the default "teal" (rgb:6A/9A/AF) from BlueNight
+        sed -i 's/^background.color:.*/background.color: #333333/' /root/.fluxbox/styles/CustomDark
+        
+        # Ensure it is set to flat so the color applies
+        if grep -q "background:" /root/.fluxbox/styles/CustomDark; then
+             sed -i 's/^background:.*/background: flat/' /root/.fluxbox/styles/CustomDark
+        else
+             echo "background: flat" >> /root/.fluxbox/styles/CustomDark
+        fi
+
         echo "session.styleFile: /root/.fluxbox/styles/CustomDark" >> /root/.fluxbox/init
     else
          # Fallback if no known style exists
